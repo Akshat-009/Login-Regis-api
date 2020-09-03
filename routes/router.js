@@ -2,8 +2,10 @@ import express from "express"
 import User from "../models/userModel.js"
 import bcrypt from "bcryptjs"
 import jsonwebtoken from "jsonwebtoken"
+import auth from "../middleware/auth.js"
 const jwt=jsonwebtoken
 const router=express.Router();
+
 
 router.get("/",(req,res)=>{
     res.status(200).json("Successfully routing")
@@ -72,5 +74,23 @@ router.get("/viewpost",(req,res)=>{
             res.status(200).json(data)
         }
     })
+})
+router.delete("/delete",auth,async (req,res)=>{
+    try{
+      const deleteuser=await User.findByIdAndDelete(req.user);
+      res.status(200).json(`Deleted User ${deleteuser}`)
+    }
+    catch(error)
+    {
+        res.status(200).json(`Error ${error} occured`)
+    }
+})
+router.post("/checktoken",(req,res)=>{
+    const token =req.header("x-auth-token");
+    const verify =jwt.verify(token,"dsadsdsadafass");
+    if (verify)
+    {
+        res.status(200).send("Token verified")
+    }
 })
 export default router

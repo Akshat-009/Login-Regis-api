@@ -27,6 +27,8 @@ app.use("/",router)
 app.use("/createpost",router)
 app.use("/viewpost",router)
 app.use("/login",router)
+app.use("/delete",router)
+app.use("/checktoken",router)
 app.listen(PORT,()=>{
     console.log(`Started on port ${PORT}`)
 })
