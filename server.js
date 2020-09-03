@@ -24,6 +24,8 @@ app.use(express.json())
 app.use(cors())
 
 app.use("/",router)
+app.use("/createpost",router)
+app.use("/viewpost",router)
 app.listen(PORT,()=>{
     console.log(`Started on port ${PORT}`)
 })
