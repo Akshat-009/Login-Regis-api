@@ -2,6 +2,8 @@ import express from "express"
 import mongoose from "mongoose"
 import cors from "cors"
 import dotenv from 'dotenv'
+import User from "./models/userModel.js"
+import router from "./routes/router.js"
 dotenv.config()
 
 
@@ -21,9 +23,7 @@ mongoose.connect(process.env.MONGOOSE_CONNECT_URL,{useUnifiedTopology:true,useNe
 app.use(express.json())
 app.use(cors())
 
-app.get("/",(req,res)=>{
-    res.status(200).send("Started succesfully")
-})
+app.use("/",router)
 app.listen(PORT,()=>{
     console.log(`Started on port ${PORT}`)
 })
