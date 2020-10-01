@@ -6,6 +6,7 @@ import auth from "../middleware/auth.js"
 const jwt=jsonwebtoken
 const router=express.Router();
 
+//using ES6, Added type=module for this
 
 router.get("/",(req,res)=>{
     res.status(200).json("Successfully routing")
@@ -14,7 +15,7 @@ router.post("/createpost", async (req,res)=>{
     const {displayName,email,password,} =req.body;
    
    const userexists = await  User.find({email:email})
-//    console.log(userexists)
+
    if ((userexists).length!=0)
 
    {
@@ -40,7 +41,7 @@ router.post("/login", async (req,res)=>{
 
     try{
     if ((user).length!=0)
-    { // console.log(user.password)
+    { 
         const ismatch= await bcrypt.compare(password,user.password)
         const token=jwt.sign({id:user._id},"dsadsdsadafass");
         
