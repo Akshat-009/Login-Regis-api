@@ -1,5 +1,5 @@
 import jsonwebtoken from "jsonwebtoken"
-import e from "express"
+import express from "express"
 const jwt =jsonwebtoken
 const auth=(req,res,next)=>{
     const token =req.header("x-auth-token")
